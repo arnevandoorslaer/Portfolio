@@ -18,9 +18,8 @@
     const content = document.querySelector('.content');
     db.collection('urls').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(item => {
-      console.log(item.doc.data().short)
       if(item.doc.data().short == requestParam){
-        res.redirect(item.doc.data().full)
+        this.location.href = item.doc.data().full
       }
     })
   });
