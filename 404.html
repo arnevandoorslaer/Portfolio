@@ -5,6 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    body{
+        margin: 0; /* Remove default margin */
+    }
+    iframe{      
+        display: block;  /* iframes are inline by default */   
+        height: 100vh;  /* Set height to 100% of the viewport height */   
+        width: 100vw;  /* Set width to 100% of the viewport width */     
+        border: none; /* Remove default border */
+        background: lightyellow; /* Just for styling */
+    }
+</style>
 </head>
 
 <body>
@@ -12,16 +24,18 @@
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
   <script src="firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript">
     const requestParam = decodeURIComponent(this.location.pathname).substring(1);
     const content = document.querySelector('.content');
     db.collection('urls').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(item => {
-      if(item.doc.data().short == requestParam){
-        this.location.href = item.doc.data().full
-      }
-    })
-  });
+        if (item.doc.data().short == requestParam){
+          this.location.href = item.doc.data().full
+        }
+      })
+    });
+    $(`<iframe src="${new URL('not-found.html',this.location.origin)}"/>`).appendTo($('.content'))
   </script>
 </body>
 
