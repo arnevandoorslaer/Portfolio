@@ -30,7 +30,7 @@
     const content = document.querySelector('.content');
     db.collection('urls').onSnapshot(snapshot => {
       const url = snapshot.docChanges().find(item => item.doc.data().short == requestParam);
-      if(url) this.location.href = item.doc.data().full
+      if(url) this.location.href = url.doc.data().full
       $(`<iframe src="${new URL('not-found.html',this.location.origin)}"/>`).appendTo($('.content'))
     });
   </script>
