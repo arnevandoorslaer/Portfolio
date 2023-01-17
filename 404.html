@@ -31,7 +31,9 @@
     db.collection('urls').onSnapshot(snapshot => {
       const url = snapshot.docChanges().find(item => item.doc.data().short == requestParam);
       if(url) this.location.href = url.doc.data().full
-      $(`<iframe src="${new URL('not-found.html',this.location.origin)}"/>`).appendTo($('.content'))
+      setTimeout(() => {
+        $(`<iframe src="${new URL('not-found.html',this.location.origin)}"/>`).appendTo($('.content'))
+      }, 1000);
     });
   </script>
 </body>
