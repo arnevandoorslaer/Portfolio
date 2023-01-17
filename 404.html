@@ -29,13 +29,10 @@
     const requestParam = decodeURIComponent(this.location.pathname).substring(1);
     const content = document.querySelector('.content');
     db.collection('urls').onSnapshot(snapshot => {
-    snapshot.docChanges().forEach(item => {
-        if (item.doc.data().short == requestParam){
-          this.location.href = item.doc.data().full
-        }
-      })
+      const url = snapshot.docChanges().find(item => item.doc.data().short == requestParam);
+      if(url) this.location.href = item.doc.data().full
+      $(`<iframe src="${new URL('not-found.html',this.location.origin)}"/>`).appendTo($('.content'))
     });
-    $(`<iframe src="${new URL('not-found.html',this.location.origin)}"/>`).appendTo($('.content'))
   </script>
 </body>
 
