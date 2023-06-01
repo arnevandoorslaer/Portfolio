@@ -25,10 +25,11 @@
   <script src="firebase.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript">
-    const requestParam = decodeURIComponent(this.location.pathname).substring(1);
+    const requestParam = decodeURIComponent(this.location.pathname).split('/')[1];
     const content = document.querySelector('.content');
     db.collection('urls').onSnapshot(snapshot => {
       const url = snapshot.docChanges().find(item => item.doc.data().short == requestParam);
+
       if(url) this.location.href = url.doc.data().full
       setTimeout(() => {
         $(`<iframe src="not-found.html"/>`).appendTo($('.content'))
